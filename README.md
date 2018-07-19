@@ -1,2 +1,2 @@
 # Check-insFoursquare
-Check-ins Android application
+Check-ins Android application that uses Foursquare API
