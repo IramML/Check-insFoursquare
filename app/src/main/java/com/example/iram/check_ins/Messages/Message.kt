@@ -5,8 +5,13 @@ import android.widget.Toast
 
 class Message {
     companion object {
-        fun messageSuccess(){
-
+        fun message(context: Context, message:Messages){
+            var str=""
+            when(message){
+                Messages.RATIONALE->{
+                    str="Permission is required to obtain location"
+                }
+            }
         }
         fun messageError(context: Context, errors: Errors){
              var message=""
@@ -28,6 +33,9 @@ class Message {
                 }
                 Errors.ERROR_SAVE_TOKEN->{
                     message="Could not save token"
+                }
+                Errors.PERMISSION_DENIED->{
+                    message="You did not give permissions to get location"
                 }
             }
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
