@@ -28,6 +28,7 @@ class Network(var activity: AppCompatActivity){
                 Log.d("HTTP_REQUEST", error.message)
                 Message.messageError(context, Errors.HTTP_ERROR)
             })
+            queue.add(request)
         }else{
             Message.messageError(context, Errors.NO_NETWORK_AVAILABLE)
         }

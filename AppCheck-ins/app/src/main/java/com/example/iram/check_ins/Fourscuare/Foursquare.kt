@@ -20,8 +20,8 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
     private val SETTINGS="settings"
     private val ACCESS_TOKEN="accessToken"
 
-    private val URL_BASE="https//api.foursquare.com/v2/"
-    private val VERSION="20180117"
+    private val URL_BASE="https://api.foursquare.com/v2/"
+    private val VERSION="v=20180117"
 
     fun logIn(){
         val intent=FoursquareOAuth.getConnectIntent(activity.applicationContext, CLIENT_ID)
@@ -93,13 +93,13 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
         activity.startActivity(Intent(this.activity, destinyActivity::class.java))
         activity.finish()
     }
-    private fun getVenues(lat:String, lng:String, getVenuesInterface: getVenuesInterface){
+    fun getVenues(lat:String, lng:String, getVenuesInterface: getVenuesInterface){
         val network=Network(activity)
         val section="venues/"
         val method="search/"
         val ll="ll=$lat,$lng"
-        val token="oauth_token= ${getToken()}"
-        val url="$URL_BASE$section$method?$ll&$token & $VERSION"
+        val token="oauth_token=${getToken()}"
+        val url="$URL_BASE$section$method?$ll&$token&$VERSION"
         network.httpRequest(activity.applicationContext, url, object:HttpResponse{
             override fun httpResponseSuccess(response: String) {
                 var gson= Gson()
