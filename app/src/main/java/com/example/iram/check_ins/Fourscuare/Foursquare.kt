@@ -62,17 +62,15 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
         val exception=responseToken.exception
         if (exception==null){
             val accessToken=responseToken.accessToken
-            if(!saveToken(accessToken)){
-                Message.messageError(activity.applicationContext, Errors.ERROR_SAVE_TOKEN)
-                goToNextActivity(destinyActivity)
-            }
 
+            if(!saveToken(accessToken)) Message.messageError(activity.applicationContext, Errors.ERROR_SAVE_TOKEN)
+            else goToNextActivity()
 
         }else{
             Message.messageError(activity.applicationContext, Errors.ERROR_EXCHANGE_TOKEN)
         }
     }
-    private fun tokenAvailable():Boolean{
+    fun tokenAvailable():Boolean{
         return getToken()!=""
     }
     fun getToken():String{
@@ -91,7 +89,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
         editor.apply()
         return true
     }
-    private fun goToNextActivity(destinyActivity: AppCompatActivity){
+    fun goToNextActivity(){
         activity.startActivity(Intent(this.activity, destinyActivity::class.java))
         activity.finish()
     }
