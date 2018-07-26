@@ -2,9 +2,13 @@ package com.example.iram.check_ins.Fourscuare
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
+import com.example.iram.check_ins.Interfaces.HttpResponse
+import com.example.iram.check_ins.Interfaces.getVenuesInterface
 import com.example.iram.check_ins.Messages.Errors
 import com.example.iram.check_ins.Messages.Message
+import com.example.iram.check_ins.Util.Network
 import com.foursquare.android.nativeoauth.FoursquareOAuth
+import com.google.gson.Gson
 
 class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatActivity) {
     private val CODE_CONNECTION=200
@@ -15,6 +19,9 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
 
     private val SETTINGS="settings"
     private val ACCESS_TOKEN="accessToken"
+
+    private val URL_BASE="https//api.foursquare.com/v2/"
+    private val VERSION="20180117"
 
     fun logIn(){
         val intent=FoursquareOAuth.getConnectIntent(activity.applicationContext, CLIENT_ID)
@@ -87,5 +94,32 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
     private fun goToNextActivity(destinyActivity: AppCompatActivity){
         activity.startActivity(Intent(this.activity, destinyActivity::class.java))
         activity.finish()
+    }
+    private fun getVenues(lat:String, lng:String, getVenuesInterface: getVenuesInterface){
+        val network=Network(activity)
+        val section="venues/"
+        val method="search/"
+        val ll="ll=$lat,$lng"
+        val token="oauth_token= ${getToken()}"
+        val url="$URL_BASE$section$method?$ll&$token & $VERSION"
+        network.httpRequest(activity.applicationContext, url, object:HttpResponse{
+            override fun httpResponseSuccess(response: String) {
+                var gson= Gson()
+                var objectResonse=gson.fromJson(response, FoursquareAPIRequestVenues::class.java)
+
+                var meta=objectResonse.meta
+                var venues=objectResonse.response?.venues!!
+
+                if(meta?.code==200){
+                    getVenuesInterface.venuesGenerated(venues)
+                }else if (meta?.code==400){
+                    Message.messageError(activity.applicationContext, meta.errorDetail)
+                }else{
+                    //generic message
+                    Message.messageError(activity.applicationContext, Errors.ERROR_QUERY)
+                }
+            }
+
+        })
     }
 }

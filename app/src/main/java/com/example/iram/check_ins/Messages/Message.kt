@@ -37,8 +37,14 @@ class Message {
                 Errors.PERMISSION_DENIED->{
                     message="You did not give permissions to get location"
                 }
+                Errors.ERROR_QUERY->{
+                    message="There was a problem in the API request"
+                }
             }
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
+        fun messageError(context: Context, error: String) {
+            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
         }
     }
 }
