@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Main">
+    android:orientation="vertical"
+    tools:context=".Activities.VenuesCategories">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/Theme.AppCompat.Light"/>
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvVenues"
+        android:id="@+id/rvVenuesCategories"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

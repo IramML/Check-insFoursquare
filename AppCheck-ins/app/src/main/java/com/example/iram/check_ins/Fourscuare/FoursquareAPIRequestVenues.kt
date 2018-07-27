@@ -19,7 +19,7 @@ class Venue{
     var id:String=""
     var name:String=""
     var location:Location?=null
-    var categories:ArrayList<CategorY>?=null
+    var categories:ArrayList<Category>?=null
     var stats:Stats?=null
 }
 class Location{
@@ -28,10 +28,12 @@ class Location{
     var state:String=""
     var country:String=""
 }
-class CategorY{
+class Category{
     var id:String=""
     var name:String=""
     var icon:Icon?=null
+    var pluralName:String=""
+    var shortName:String=""
 }
 open class Icon{
     var prefix:String=""
@@ -81,4 +83,11 @@ class Checkins{
 class Checkin{
     var shout=""
     var venue:Venue?=null
+}
+class FoursquareAPICategories{
+    var meta:Meta?=null
+    var response:Categories?=null
+}
+class Categories{
+    var categories:ArrayList<Category>?=null
 }

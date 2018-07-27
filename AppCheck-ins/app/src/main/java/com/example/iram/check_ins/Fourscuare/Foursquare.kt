@@ -6,9 +6,11 @@ import android.util.Log
 import android.widget.Toast
 import com.example.iram.check_ins.Interfaces.HttpResponse
 import com.example.iram.check_ins.Interfaces.UsersInterface
+import com.example.iram.check_ins.Interfaces.categoriesVenuesInterface
 import com.example.iram.check_ins.Interfaces.getVenuesInterface
 import com.example.iram.check_ins.Messages.Errors
 import com.example.iram.check_ins.Messages.Message
+import com.example.iram.check_ins.Messages.Messages
 import com.example.iram.check_ins.Util.Location
 import com.example.iram.check_ins.Util.Network
 import com.foursquare.android.nativeoauth.FoursquareOAuth
@@ -124,6 +126,34 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
 
         })
     }
+     fun getVenues(lat:String, lng:String, idCategory:String, getVenuesInterface: getVenuesInterface){
+        val network=Network(activity)
+        val section="venues/"
+        val method="search/"
+        val ll="ll=$lat,$lng"
+        val category="categoryId=$idCategory"
+        val token="oauth_token=${getToken()}"
+        val url="$URL_BASE$section$method?$ll&$category&$token&$VERSION"
+        network.httpRequest(activity.applicationContext, url, object:HttpResponse{
+            override fun httpResponseSuccess(response: String) {
+                var gson= Gson()
+                var objectResonse=gson.fromJson(response, FoursquareAPIRequestVenues::class.java)
+
+                var meta=objectResonse.meta
+                var venues=objectResonse.response?.venues!!
+
+                if(meta?.code==200){
+                    getVenuesInterface.venuesGenerated(venues)
+                }else if (meta?.code==400){
+                    Message.messageError(activity.applicationContext, meta.errorDetail)
+                }else{
+                    //generic message
+                    Message.messageError(activity.applicationContext, Errors.ERROR_QUERY)
+                }
+            }
+
+        })
+    }
     fun newCheckin(id:String, location:com.example.iram.check_ins.Fourscuare.Location, message:String){
         val network=Network(activity)
         val section="checkins/"
@@ -139,6 +169,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
                 var meta=objectResonse.meta
 
                 if(meta?.code==200){
+                    Message.message(activity.applicationContext, Messages.CHECKIN_SUCCESS)
                 }else if (meta?.code==400){
                     Message.messageError(activity.applicationContext, meta.errorDetail)
                 }else{
@@ -164,8 +195,33 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
                 var meta=objectResonse.meta
 
                 if(meta?.code==200){
-                    //Toast.makeText(activity.applicationContext)
                     currentUserInterface.getCurrentUser(objectResonse.response?.user!!)
+                }else if (meta?.code==400){
+                    Message.messageError(activity.applicationContext, meta.errorDetail)
+                }else{
+                    //generic message
+                    Message.messageError(activity.applicationContext, Errors.ERROR_QUERY)
+                }
+            }
+
+        })
+    }
+    fun loadCategories(categoriesInterface:categoriesVenuesInterface){
+        val network=Network(activity)
+        val section="venues/"
+        val method="categories/"
+        val token="oauth_token=${getToken()}"
+        var query="?$token&$VERSION"
+        val url="$URL_BASE$section$method$query"
+        network.httpRequest(activity.applicationContext, url, object:HttpResponse{
+            override fun httpResponseSuccess(response: String) {
+                val gson= Gson()
+                var objectResonse=gson.fromJson(response, FoursquareAPICategories::class.java)
+
+                var meta=objectResonse.meta
+
+                if(meta?.code==200){
+                    categoriesInterface.categoriesVenues(objectResonse.response?.categories!!)
                 }else if (meta?.code==400){
                     Message.messageError(activity.applicationContext, meta.errorDetail)
                 }else{

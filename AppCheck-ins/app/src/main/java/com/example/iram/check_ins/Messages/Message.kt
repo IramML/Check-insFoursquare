@@ -11,6 +11,9 @@ class Message {
                 Messages.RATIONALE->{
                     str="Permission is required to obtain location"
                 }
+                Messages.CHECKIN_SUCCESS->{
+                    str="Check-in added"
+                }
             }
         }
         fun messageError(context: Context, errors: Errors){
