@@ -2,10 +2,14 @@ package com.example.iram.check_ins.Fourscuare
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.widget.Toast
 import com.example.iram.check_ins.Interfaces.HttpResponse
+import com.example.iram.check_ins.Interfaces.UsersInterface
 import com.example.iram.check_ins.Interfaces.getVenuesInterface
 import com.example.iram.check_ins.Messages.Errors
 import com.example.iram.check_ins.Messages.Message
+import com.example.iram.check_ins.Util.Location
 import com.example.iram.check_ins.Util.Network
 import com.foursquare.android.nativeoauth.FoursquareOAuth
 import com.google.gson.Gson
@@ -110,6 +114,58 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
 
                 if(meta?.code==200){
                     getVenuesInterface.venuesGenerated(venues)
+                }else if (meta?.code==400){
+                    Message.messageError(activity.applicationContext, meta.errorDetail)
+                }else{
+                    //generic message
+                    Message.messageError(activity.applicationContext, Errors.ERROR_QUERY)
+                }
+            }
+
+        })
+    }
+    fun newCheckin(id:String, location:com.example.iram.check_ins.Fourscuare.Location, message:String){
+        val network=Network(activity)
+        val section="checkins/"
+        val method="add/"
+        val token="oauth_token=${getToken()}"
+        var query="?venueId=$id&shout=$message&ll=${location.lat.toString()},${location.lng.toString()}&$token&$VERSION"
+        val url="$URL_BASE$section$method$query"
+        network.httpPOSTRequest(activity.applicationContext, url, object:HttpResponse{
+            override fun httpResponseSuccess(response: String) {
+                val gson= Gson()
+                var objectResonse=gson.fromJson(response, FoursquareAPINewCheckin::class.java)
+
+                var meta=objectResonse.meta
+
+                if(meta?.code==200){
+                }else if (meta?.code==400){
+                    Message.messageError(activity.applicationContext, meta.errorDetail)
+                }else{
+                    //generic message
+                    Message.messageError(activity.applicationContext, Errors.ERROR_QUERY)
+                }
+            }
+
+        })
+    }
+    fun getCurrentUser(currentUserInterface:UsersInterface){
+        val network=Network(activity)
+        val section="users/"
+        val method="self/"
+        val token="oauth_token=${getToken()}"
+        var query="?$token&$VERSION"
+        val url="$URL_BASE$section$method$query"
+        network.httpRequest(activity.applicationContext, url, object:HttpResponse{
+            override fun httpResponseSuccess(response: String) {
+                val gson= Gson()
+                var objectResonse=gson.fromJson(response, FoursquareAPISelfUser::class.java)
+
+                var meta=objectResonse.meta
+
+                if(meta?.code==200){
+                    //Toast.makeText(activity.applicationContext)
+                    currentUserInterface.getCurrentUser(objectResonse.response?.user!!)
                 }else if (meta?.code==400){
                     Message.messageError(activity.applicationContext, meta.errorDetail)
                 }else{

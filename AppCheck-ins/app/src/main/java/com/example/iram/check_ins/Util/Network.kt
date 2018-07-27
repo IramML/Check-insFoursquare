@@ -25,7 +25,22 @@ class Network(var activity: AppCompatActivity){
             val request = StringRequest(Request.Method.GET, url, Response.Listener<String> { response ->
                 httpResponse.httpResponseSuccess(response)
             }, Response.ErrorListener { error ->
-                Log.d("HTTP_REQUEST", error.message)
+                Log.d("HTTP_REQUEST", error.message.toString())
+                Message.messageError(context, Errors.HTTP_ERROR)
+            })
+            queue.add(request)
+        }else{
+            Message.messageError(context, Errors.NO_NETWORK_AVAILABLE)
+        }
+    }
+    fun httpPOSTRequest(context: Context, url:String, httpResponse: HttpResponse){
+        if(availableNetwok()) {
+            val queue = Volley.newRequestQueue(context)
+
+            val request = StringRequest(Request.Method.POST, url, Response.Listener<String> { response ->
+                httpResponse.httpResponseSuccess(response)
+            }, Response.ErrorListener { error ->
+                Log.d("HTTP_REQUEST", error.message.toString())
                 Message.messageError(context, Errors.HTTP_ERROR)
             })
             queue.add(request)
