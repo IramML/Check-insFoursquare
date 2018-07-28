@@ -30,7 +30,8 @@
             android:name=".Activities.Categories"
             android:parentActivityName=".Activities.Main" />
         <activity android:name=".Activities.VenuesCategories" />
-        <activity android:name=".Activities.Likes"></activity>
+        <activity android:name=".Activities.Likes" />
+        <activity android:name=".Activities.Profile"></activity>
     </application>
 
 </manifest>

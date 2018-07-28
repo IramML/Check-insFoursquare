@@ -41,7 +41,7 @@ class Likes : AppCompatActivity() {
                     implementRecyclerView(venues)
                 }
             })
-        }
+        }else foursquare?.sendLogin()
 
     }
     private fun initRecyclerView(){

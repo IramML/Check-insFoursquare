@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.example.iram.check_ins.Fourscuare.Venue
 import com.example.iram.check_ins.R
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.venues_template.view.*
 
 
@@ -32,7 +34,12 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         var item=items?.get(i)
-        viewHolder.tvName.text = "Name: " + item?.name
+        viewHolder.tvName?.text = item?.name
+        viewHolder.tvState?.text ="State: ${item?.location?.state}"
+        if (item?.categories?.size!!>0) viewHolder.tvCategory?.text = item?.categories?.get(0)?.name
+        else viewHolder.tvCategory?.text = "Without category"
+        viewHolder.tvCheckins?.text = "Checkins: ${item?.stats?.checkinsCount.toString()}"
+        Picasso.get().load(item.imagePreview).placeholder(R.drawable.placeholder).into(viewHolder.ivPhoto)
         //viewHolder.tvCost.text = "Cost: " + items[i].cost
         //viewHolder.rating.rating = items[i].rating
 
@@ -101,14 +108,21 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
     }
 
     class ViewHolder(itemView: View, listener:ClickListener, longClickListener:LongClickListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnLongClickListener {
-        var tvName: TextView
-        //var tvCost: TextView
+        var tvName: TextView?=null
+        var tvState:TextView?=null
+        var tvCategory:TextView?=null
+        var tvCheckins:TextView?=null
+        var ivPhoto:ImageView?=null
         //var rating: RatingBar
         var listener: ClickListener?=null
         var longClickListener: LongClickListener?=null
 
         init {
             tvName = itemView.tvName
+            tvState = itemView.tvState
+            tvCategory = itemView.tvCategory
+            tvCheckins = itemView.tvCheckins
+            ivPhoto=itemView.ivPhoto
             //tvCost = itemView.findViewById(R.id.tvCost)
             //rating = itemView.findViewById(R.id.rating)
             this.listener=listener

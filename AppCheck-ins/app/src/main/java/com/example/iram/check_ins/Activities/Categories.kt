@@ -32,13 +32,16 @@ class Categories : AppCompatActivity() {
         initRecyclerView()
         initToolbar()
         var foursquare=Foursquare(this, Categories())
-        foursquare.loadCategories(object:categoriesVenuesInterface{
-            override fun categoriesVenues(categories: ArrayList<Category>) {
-                Log.d("CATEGORIES", categories.count().toString())
-                implementRecyclerView(categories)
-            }
+        if (foursquare.tokenAvailable()){
+            foursquare.loadCategories(object:categoriesVenuesInterface{
+                override fun categoriesVenues(categories: ArrayList<Category>) {
+                    Log.d("CATEGORIES", categories.count().toString())
+                    implementRecyclerView(categories)
+                }
 
-        })
+            })
+        }else foursquare?.sendLogin()
+
     }
     private fun initRecyclerView(){
         list=findViewById(R.id.rvCategories)

@@ -67,17 +67,11 @@ class VenueDetails : AppCompatActivity() {
                             dialogInterface, i ->
 
                         })).show()
-            }
+            }else foursquare?.sendLogin()
         }
         btnLike?.setOnClickListener {
             if (foursquare.tokenAvailable()) foursquare.newLike(currentVenue.id)
         }
-        /*foursquare.getCurrentUser(object:UsersInterface{
-            override fun getCurrentUser(user: User) {
-                Toast.makeText(applicationContext, user.firstName, Toast.LENGTH_SHORT).show()
-            }
-
-        })*/
     }
     fun initToolbar(currentVenueName:String){
         toolbar=findViewById(R.id.toolbar)

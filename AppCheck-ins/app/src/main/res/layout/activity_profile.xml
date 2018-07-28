@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activities.VenueDetails">
+    tools:context="com.example.iram.check_ins.Activities.Profile">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -18,47 +18,28 @@
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Text view"/>
+        android:text="TextView" />
+
     <TextView
-        android:id="@+id/tvState"
+        android:id="@+id/tvFriends"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <TextView
-        android:id="@+id/tvCountry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <TextView
-        android:id="@+id/tvCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <TextView
-        android:id="@+id/tvCheckins"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <TextView
-        android:id="@+id/tvUsers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
+        android:text="TextView" />
     <TextView
         android:id="@+id/tvTips"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <Button
-        android:id="@+id/btnCkeckin"
+        android:text="TextView" />
+    <TextView
+        android:id="@+id/tvPhotos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="Check-in"/>
-    <Button
-        android:id="@+id/btnLike"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvCheckins"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="Like"/>
+        android:text="TextView" />
+
 </LinearLayout>

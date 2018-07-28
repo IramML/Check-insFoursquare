@@ -1,5 +1,7 @@
 package com.example.iram.check_ins.Fourscuare
 
+import android.media.Image
+
 class FoursquareAPIRequestVenues {
     var meta:Meta?=null
     var response:FoursquareResponseVenue?=null
@@ -21,6 +23,7 @@ class Venue{
     var location:Location?=null
     var categories:ArrayList<Category>?=null
     var stats:Stats?=null
+    var imagePreview:String=""
 }
 class Location{
     var lat:Double=0.0
@@ -103,4 +106,11 @@ class VenuesLikesResponse{
 }
 class VenuesLikeObject{
     var items:ArrayList<Venue>?=null
+}
+class ImagePreviewVenueResponse{
+    var meta:Meta?=null
+    var response:PhotosResponse?=null
+}
+class PhotosResponse{
+    var photos:Photos?=null
 }

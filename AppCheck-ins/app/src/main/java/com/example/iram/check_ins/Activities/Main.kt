@@ -56,15 +56,12 @@ class Main : AppCompatActivity() {
                     foursquare?.getVenues(lat, lng, object:getVenuesInterface{
                         override fun venuesGenerated(venues: ArrayList<Venue>) {
                             implementRecyclerView(venues)
-                            for(venue in venues){
-                                Log.d("VENUE", venue.name)
-                            }
                         }
                     })
                 }
             })
 
-        }
+        }else foursquare?.sendLogin()
 
     }
     private fun implementRecyclerView(venuesList:ArrayList<Venue>){
@@ -117,9 +114,15 @@ class Main : AppCompatActivity() {
                 return true
             }
             R.id.ic_profile->{
+                val intent=Intent(this, Profile::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.ic_Logout->{
+                foursquare?.logout()
+                val intent=Intent(this, Login::class.java)
+                startActivity(intent)
+                finish()
                 return true
             }
             else->return super.onOptionsItemSelected(item)

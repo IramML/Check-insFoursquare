@@ -54,7 +54,7 @@ class VenuesCategories : AppCompatActivity() {
                     })
                 }
             })
-        }
+        }else foursquare?.sendLogin()
     }
     private fun initRecyclerView(){
         list=findViewById(R.id.rvVenuesCategories)
