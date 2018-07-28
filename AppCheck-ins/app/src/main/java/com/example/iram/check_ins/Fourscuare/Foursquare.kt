@@ -4,10 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
-import com.example.iram.check_ins.Interfaces.HttpResponse
-import com.example.iram.check_ins.Interfaces.UsersInterface
-import com.example.iram.check_ins.Interfaces.categoriesVenuesInterface
-import com.example.iram.check_ins.Interfaces.getVenuesInterface
+import com.example.iram.check_ins.Interfaces.*
 import com.example.iram.check_ins.Messages.Errors
 import com.example.iram.check_ins.Messages.Message
 import com.example.iram.check_ins.Messages.Messages
@@ -178,6 +175,58 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
                 }
             }
 
+        })
+    }
+    fun newLike(id:String){
+        val network=Network(activity)
+        val section="venues/"
+        val method="like/"
+        val token="oauth_token=${getToken()}"
+        var query="?$token&$VERSION"
+        val url="$URL_BASE$section$id/$method$query"
+        network.httpPOSTRequest(activity.applicationContext, url, object:HttpResponse{
+            override fun httpResponseSuccess(response: String) {
+                Log.d("NEW_LIKE", response)
+                val gson=Gson()
+                val objectResponse=gson.fromJson(response, LikeResponse::class.java)
+
+                val meta=objectResponse.meta
+                if(meta?.code==200){
+                    Message.message(activity.applicationContext, Messages.LIKE_SUCCESS)
+                }else if (meta?.code==400){
+                    Message.messageError(activity.applicationContext, meta.errorDetail)
+                }else{
+                    //generic message
+                    Message.messageError(activity.applicationContext, Errors.ERROR_QUERY)
+                }
+            }
+
+
+        })
+    }
+    fun getLikeVenues(venuesLikesInterface: VenuesLikesInterface){
+        val network=Network(activity)
+        val section="users/"
+        val method="self/"
+        val token="oauth_token=${getToken()}"
+        val url="$URL_BASE$section${method}venuelikes?limit=10&$token&$VERSION"
+        network.httpRequest(activity.applicationContext, url, object:HttpResponse {
+            override fun httpResponseSuccess(response: String) {
+                var gson = Gson()
+                var objectResonse = gson.fromJson(response, VenuesLikes::class.java)
+
+                var meta = objectResonse.meta
+                var venues = objectResonse.response?.venues?.items!!
+
+                if (meta?.code == 200) {
+                    venuesLikesInterface.venuesGenerated(venues)
+                } else if (meta?.code == 400) {
+                    Message.messageError(activity.applicationContext, meta.errorDetail)
+                } else {
+                    //generic message
+                    Message.messageError(activity.applicationContext, Errors.ERROR_QUERY)
+                }
+            }
         })
     }
     fun getCurrentUser(currentUserInterface:UsersInterface){

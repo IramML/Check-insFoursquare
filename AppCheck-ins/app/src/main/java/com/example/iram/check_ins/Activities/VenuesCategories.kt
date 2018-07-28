@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.View
 import com.example.iram.check_ins.Fourscuare.Category
 import com.example.iram.check_ins.Fourscuare.Foursquare
@@ -33,13 +32,13 @@ class VenuesCategories : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_venues_categories)
-        initToolbar()
+
         initRecyclerView()
 
         val currentCategoryString=intent.getStringExtra(Categories.CURRENT_CATEGORY)
         val gson=Gson()
         val currentCategory=gson.fromJson(currentCategoryString, Category::class.java)
-
+        initToolbar(currentCategory.name)
         foursquare=Foursquare(this, this)
         if(foursquare?.tokenAvailable()!!){
             location= com.example.iram.check_ins.Util.Location(this, object: locationListener {
@@ -87,10 +86,16 @@ class VenuesCategories : AppCompatActivity() {
         super.onPause()
         location?.stopUpdateLocation()
     }
-    fun initToolbar(){
+    fun initToolbar(category:String){
         toolbar=findViewById(R.id.toolbar)
-        toolbar?.setTitle(R.string.app_name)
+        toolbar?.setTitle(category)
         setSupportActionBar(toolbar)
+        var actionBar=supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+
+        toolbar?.setNavigationOnClickListener {
+            finish()
+        }
     }
 
 }

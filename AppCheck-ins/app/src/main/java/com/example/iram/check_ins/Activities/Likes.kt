@@ -6,53 +6,57 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.View
-import com.example.iram.check_ins.Fourscuare.Category
 import com.example.iram.check_ins.Fourscuare.Foursquare
-import com.example.iram.check_ins.Interfaces.categoriesVenuesInterface
+import com.example.iram.check_ins.Fourscuare.Venue
+import com.example.iram.check_ins.Interfaces.VenuesLikesInterface
+import com.example.iram.check_ins.Interfaces.getVenuesInterface
+import com.example.iram.check_ins.Interfaces.locationListener
 import com.example.iram.check_ins.R
-import com.example.iram.check_ins.RecyclerViewCategories.customAdapter
-import com.example.iram.check_ins.RecyclerViewCategories.ClickListener
-import com.example.iram.check_ins.RecyclerViewCategories.LongClickListener
+import com.example.iram.check_ins.RecyclerViewMain.ClickListener
+import com.example.iram.check_ins.RecyclerViewMain.LongClickListener
+import com.example.iram.check_ins.RecyclerViewMain.customAdapter
+import com.google.android.gms.location.LocationResult
 import com.google.gson.Gson
 
-class Categories : AppCompatActivity() {
+class Likes : AppCompatActivity() {
+    var foursquare: Foursquare?=null
+
     var adapterCustom: customAdapter? = null
     var list: RecyclerView? = null
     var layoutManager: RecyclerView.LayoutManager? = null
 
     var toolbar: Toolbar?=null
-    companion object {
-        val CURRENT_CATEGORY="checkins.Categories"
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_categories)
+        setContentView(R.layout.activity_likes)
         initRecyclerView()
-        initToolbar()
-        var foursquare=Foursquare(this, Categories())
-        foursquare.loadCategories(object:categoriesVenuesInterface{
-            override fun categoriesVenues(categories: ArrayList<Category>) {
-                Log.d("CATEGORIES", categories.count().toString())
-                implementRecyclerView(categories)
-            }
 
-        })
+        initToolbar()
+
+        foursquare= Foursquare(this, this)
+        if(foursquare?.tokenAvailable()!!){
+            foursquare?.getLikeVenues(object: VenuesLikesInterface {
+                override fun venuesGenerated(venues: ArrayList<Venue>) {
+                    implementRecyclerView(venues)
+                }
+            })
+        }
+
     }
     private fun initRecyclerView(){
-        list=findViewById(R.id.rvCategories)
+        list=findViewById(R.id.rvVenues)
         list?.setHasFixedSize(true)
         layoutManager= LinearLayoutManager(this)
         list?.layoutManager=layoutManager
     }
-    private fun implementRecyclerView(categoriesList:ArrayList<Category>){
-        adapterCustom = customAdapter(categoriesList, object : ClickListener {
+    private fun implementRecyclerView(venuesList:ArrayList<Venue>){
+        adapterCustom = customAdapter(venuesList, object : ClickListener {
             override fun onClick(view: View, index: Int) {
-                val categoryToJson= Gson()
-                val currentCategoryString=categoryToJson.toJson(categoriesList.get(index))
-                val intent= Intent(applicationContext, VenuesCategories::class.java)
-                intent.putExtra(Categories.CURRENT_CATEGORY, currentCategoryString)
+                val venueToJson= Gson()
+                val currentVenueString=venueToJson.toJson(venuesList.get(index))
+                val intent= Intent(applicationContext, VenueDetails::class.java)
+                intent.putExtra(Main.CURRENT_VENUE, currentVenueString)
                 startActivity(intent)
             }
 
@@ -63,7 +67,7 @@ class Categories : AppCompatActivity() {
     }
     fun initToolbar(){
         toolbar=findViewById(R.id.toolbar)
-        toolbar?.setTitle(R.string.app_categories)
+        toolbar?.setTitle(R.string.app_favorites)
         setSupportActionBar(toolbar)
         var actionBar=supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)

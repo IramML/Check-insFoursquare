@@ -26,8 +26,11 @@
             android:name="com.foursquare.android.nativeoauth.TokenExchangeActivity"
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".Activities.VenueDetails" />
-        <activity android:name=".Activities.Categories" />
-        <activity android:name=".Activities.VenuesCategories"></activity>
+        <activity
+            android:name=".Activities.Categories"
+            android:parentActivityName=".Activities.Main" />
+        <activity android:name=".Activities.VenuesCategories" />
+        <activity android:name=".Activities.Likes"></activity>
     </application>
 
 </manifest>

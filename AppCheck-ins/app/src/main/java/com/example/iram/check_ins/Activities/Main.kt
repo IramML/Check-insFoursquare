@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.example.iram.check_ins.Interfaces.VenuesLikesInterface
 import com.example.iram.check_ins.RecyclerViewMain.ClickListener
 import com.example.iram.check_ins.RecyclerViewMain.LongClickListener
 import com.example.iram.check_ins.RecyclerViewMain.customAdapter
@@ -111,6 +112,8 @@ class Main : AppCompatActivity() {
                 return true
             }
             R.id.ic_Favorites->{
+                val intent=Intent(this, Likes::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.ic_profile->{
