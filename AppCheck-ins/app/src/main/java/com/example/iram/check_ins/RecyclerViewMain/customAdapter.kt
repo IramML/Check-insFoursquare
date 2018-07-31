@@ -39,7 +39,10 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
         if (item?.categories?.size!!>0) viewHolder.tvCategory?.text = item?.categories?.get(0)?.name
         else viewHolder.tvCategory?.text = "Without category"
         viewHolder.tvCheckins?.text = "Checkins: ${item?.stats?.checkinsCount.toString()}"
-        Picasso.get().load(item.imagePreview).placeholder(R.drawable.placeholder).into(viewHolder.ivPhoto)
+        if(!item.imagePreview.isNullOrEmpty()) Picasso.get().load(item.imagePreview).placeholder(R.drawable.ic_launcher_background).into(viewHolder.ivPhoto)
+        else viewHolder.ivPhoto?.setImageResource(R.drawable.ic_launcher_background)
+        if(!item.iconCategory.isNullOrEmpty()) Picasso.get().load(item.iconCategory).placeholder(R.drawable.ic_category).into(viewHolder.ivCategory)
+        else viewHolder.ivCategory?.setImageResource(R.drawable.ic_category)
         //viewHolder.tvCost.text = "Cost: " + items[i].cost
         //viewHolder.rating.rating = items[i].rating
 
@@ -113,6 +116,7 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
         var tvCategory:TextView?=null
         var tvCheckins:TextView?=null
         var ivPhoto:ImageView?=null
+        var ivCategory:ImageView?=null
         //var rating: RatingBar
         var listener: ClickListener?=null
         var longClickListener: LongClickListener?=null
@@ -123,6 +127,7 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
             tvCategory = itemView.tvCategory
             tvCheckins = itemView.tvCheckins
             ivPhoto=itemView.ivPhoto
+            ivCategory=itemView.imgCategory
             //tvCost = itemView.findViewById(R.id.tvCost)
             //rating = itemView.findViewById(R.id.rating)
             this.listener=listener

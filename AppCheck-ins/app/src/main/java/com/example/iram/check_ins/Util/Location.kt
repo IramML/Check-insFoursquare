@@ -38,7 +38,7 @@ class Location(var activity: AppCompatActivity, locationListener: locationListen
 
     private fun inicializeLocationRequest() {
         locationRequest= LocationRequest()
-        locationRequest?.interval=10000
+        locationRequest?.interval=50000
         locationRequest?.fastestInterval=5000
         locationRequest?.priority=LocationRequest.PRIORITY_HIGH_ACCURACY
     }

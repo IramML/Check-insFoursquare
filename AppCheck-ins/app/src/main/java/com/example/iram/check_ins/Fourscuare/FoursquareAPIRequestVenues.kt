@@ -1,6 +1,7 @@
 package com.example.iram.check_ins.Fourscuare
 
 import android.media.Image
+import android.util.Log
 
 class FoursquareAPIRequestVenues {
     var meta:Meta?=null
@@ -24,6 +25,7 @@ class Venue{
     var categories:ArrayList<Category>?=null
     var stats:Stats?=null
     var imagePreview:String=""
+    var iconCategory:String=""
 }
 class Location{
     var lat:Double=0.0
@@ -41,6 +43,13 @@ class Category{
 open class Icon{
     var prefix:String=""
     var suffix:String=""
+    fun makeURLImage(tokenAccess:String, version:String, size:String):String{
+        val prefix=prefix
+        val suffix=suffix
+        val token="oauth_token= $tokenAccess"
+        val url="$prefix$size$suffix?$token&$version"
+        return url
+    }
 }
 class Stats{
     var checkinsCount=0

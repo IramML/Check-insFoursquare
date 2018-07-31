@@ -54,7 +54,7 @@ class VenueDetails : AppCompatActivity() {
                 val etMessage=EditText(this)
                 etMessage.hint="message"
 
-                AlertDialog.Builder(this).setTitle("New check-in")
+                var alertDialog= AlertDialog.Builder(this, R.style.CustomCastTheme).setTitle("New check-in")
                         .setMessage("Write a message")
                         .setView(etMessage)
                         .setPositiveButton("Check-in", DialogInterface.OnClickListener{
@@ -66,7 +66,9 @@ class VenueDetails : AppCompatActivity() {
                         }).setNegativeButton("Cancel", DialogInterface.OnClickListener({
                             dialogInterface, i ->
 
-                        })).show()
+                        }))
+
+                alertDialog.show()
             }else foursquare?.sendLogin()
         }
         btnLike?.setOnClickListener {

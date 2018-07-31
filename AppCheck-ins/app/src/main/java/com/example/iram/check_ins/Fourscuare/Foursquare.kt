@@ -20,7 +20,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
     private val CODE_TOKEN_EXCHANGE=201
 
     private val CLIENT_ID="GASUFJU4LJJEPKBI5WRAOO42RO01G3BM3QCJI4H1T13K0S1G"
-    private val CLIENT_SECRET="FJ1PWWDWASRGEYKNJ3LM1XOLSILDXCOY3YCVNRSBHZ0ZZHKH"
+    private val CLIENT_SECRET="LH2UVZN0QAPNMU5AF0N0YMJUUBKP3CBQ3EVKEQCU3SOENCAC"
 
     private val SETTINGS="settings"
     private val ACCESS_TOKEN="accessToken"
@@ -115,8 +115,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
         val method="search/"
         val ll="ll=$lat,$lng"
         val token="oauth_token=${getToken()}"
-        val url="$URL_BASE$section$method?$ll&$token&$VERSION"
-        Log.d("URL_REQUEST", url)
+        val url="$URL_BASE$section$method?limit=10&$ll&$token&$VERSION"
         network.httpRequest(activity.applicationContext, url, object:HttpResponse{
             override fun httpResponseSuccess(response: String) {
                 var gson= Gson()
@@ -124,18 +123,22 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
 
                 var meta=objectResonse.meta
                 var venues=objectResonse.response?.venues!!
-
-                if(meta?.code==200){
-                    for(venue in venues){
-                        getImagePreview(venue.id, object:ImagePreviewInterface{
-                            override fun getImagePreview(photos: ArrayList<Photo>) {
-                                if (photos.count()>0){
-                                    val urlImage= makeURLImage(photos.get(0))
-                                    venue.imagePreview=urlImage
+                for(venue in venues){
+                    getImagePreview(venue.id, object:ImagePreviewInterface{
+                        override fun getImagePreview(photos: ArrayList<Photo>) {
+                            if (photos.count()>0){
+                                val urlImage= photos.get(0).makeURLImage(getToken(), VERSION, "original")
+                                venue.imagePreview=urlImage
+                                if (venue.categories?.count()!!>0){
+                                    val urlIcon=venue.categories?.get(0)?.icon?.makeURLImage(getToken(), VERSION, "64")
+                                    venue.iconCategory=urlIcon!!
                                 }
+
                             }
-                        })
-                    }
+                        }
+                    })
+                }
+                if(meta?.code==200){
                     getVenuesInterface.venuesGenerated(venues)
                 }else if (meta?.code==400){
                     Message.messageError(activity.applicationContext, meta.errorDetail)
@@ -154,7 +157,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
         val ll="ll=$lat,$lng"
         val category="categoryId=$idCategory"
         val token="oauth_token=${getToken()}"
-        val url="$URL_BASE$section$method?$ll&$category&$token&$VERSION"
+        val url="$URL_BASE$section$method?limit=10&$ll&$category&$token&$VERSION"
         network.httpRequest(activity.applicationContext, url, object:HttpResponse{
             override fun httpResponseSuccess(response: String) {
                 var gson= Gson()
@@ -178,7 +181,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
         val network=Network(activity)
         val section="venues/"
         val method="photos/"
-        val token="oauth_token=${getToken()}"
+        val token="oauth_token= ${getToken()}"
         val parameters="limit=1"
         val url="$URL_BASE$section$venueId/$method?$parameters&$token&$VERSION"
         network.httpRequest(activity.applicationContext, url, object:HttpResponse{
@@ -201,15 +204,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
 
         })
     }
-    private fun makeURLImage(photo:Photo):String{
-        val prefix=photo.prefix
-        val suffix=photo.suffix
-        val size="400x200"
-        val token="oauth_token=${getToken()}"
-        val version=VERSION
-        val url="$prefix$size$suffix?$token&$version"
-        return url
-    }
+
     fun newCheckin(id:String, location:com.example.iram.check_ins.Fourscuare.Location, message:String){
         val network=Network(activity)
         val section="checkins/"
