@@ -43,11 +43,13 @@ class Category{
 open class Icon{
     var prefix:String=""
     var suffix:String=""
+    var urlIcon:String=""
     fun makeURLImage(tokenAccess:String, version:String, size:String):String{
         val prefix=prefix
         val suffix=suffix
         val token="oauth_token= $tokenAccess"
         val url="$prefix$size$suffix?$token&$version"
+        urlIcon=url
         return url
     }
 }
@@ -68,7 +70,7 @@ class User{
     var firstName=""
     var lastName=""
     var photo:Photo?=null
-    var friend:Friends?=null
+    var friends:Friends?=null
     var tips:Tips?=null
     var photos:Photos?=null
     var checkins:Checkins?=null

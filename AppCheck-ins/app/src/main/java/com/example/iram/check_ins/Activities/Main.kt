@@ -56,6 +56,7 @@ class Main : AppCompatActivity() {
                     foursquare?.getVenues(lat, lng, object:getVenuesInterface{
                         override fun venuesGenerated(venues: ArrayList<Venue>) {
                             implementRecyclerView(venues)
+                            location?.stopUpdateLocation()
                         }
                     })
                 }

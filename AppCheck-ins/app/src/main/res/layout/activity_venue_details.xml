@@ -14,51 +14,67 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/Theme.AppCompat.Light"/>
-    <TextView
-        android:id="@+id/tvName"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <TextView
-        android:id="@+id/tvState"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <TextView
-        android:id="@+id/tvCountry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <TextView
-        android:id="@+id/tvCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <TextView
-        android:id="@+id/tvCheckins"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <TextView
-        android:id="@+id/tvUsers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <TextView
-        android:id="@+id/tvTips"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text view"/>
-    <Button
-        android:id="@+id/btnCkeckin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="Check-in"/>
-    <Button
-        android:id="@+id/btnLike"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="Like"/>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Text view"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <TextView
+                android:id="@+id/tvState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Text view"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tvCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Text view"
+                android:textAlignment="center" />
+
+
+            <GridView
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:numColumns="2"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/btnLike"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Like"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btnCkeckin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Check-in"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+
+
 </LinearLayout>

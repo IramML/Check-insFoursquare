@@ -129,11 +129,10 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
                             if (photos.count()>0){
                                 val urlImage= photos.get(0).makeURLImage(getToken(), VERSION, "original")
                                 venue.imagePreview=urlImage
-                                if (venue.categories?.count()!!>0){
-                                    val urlIcon=venue.categories?.get(0)?.icon?.makeURLImage(getToken(), VERSION, "64")
-                                    venue.iconCategory=urlIcon!!
-                                }
-
+                            }
+                            if (venue.categories?.count()!!>0){
+                                val urlIcon=venue.categories?.get(0)?.icon?.makeURLImage(getToken(), VERSION, "64")
+                                venue.iconCategory=urlIcon!!
                             }
                         }
                     })
@@ -298,7 +297,9 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
                 var meta=objectResonse.meta
 
                 if(meta?.code==200){
-                    currentUserInterface.getCurrentUser(objectResonse.response?.user!!)
+                    val user=objectResonse.response?.user
+                    user?.photo?.makeURLImage(getToken(), VERSION, "128x128")
+                    currentUserInterface.getCurrentUser(user!!)
                 }else if (meta?.code==400){
                     Message.messageError(activity.applicationContext, meta.errorDetail)
                 }else{
@@ -324,6 +325,10 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
                 var meta=objectResonse.meta
 
                 if(meta?.code==200){
+                    val categories=objectResonse.response?.categories!!
+                    for (category in categories){
+                        category.icon?.makeURLImage(getToken(), VERSION, "bg_64")
+                    }
                     categoriesInterface.categoriesVenues(objectResonse.response?.categories!!)
                 }else if (meta?.code==400){
                     Message.messageError(activity.applicationContext, meta.errorDetail)

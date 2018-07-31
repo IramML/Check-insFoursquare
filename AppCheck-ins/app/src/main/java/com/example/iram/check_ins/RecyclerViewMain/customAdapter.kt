@@ -16,8 +16,6 @@ import kotlinx.android.synthetic.main.venues_template.view.*
 
 
 class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var longClickListener: LongClickListener) : RecyclerView.Adapter<customAdapter.ViewHolder>() {
-    var multiSelection: Boolean? = false
-
     var itemsSelected: ArrayList<Int>
     var viewHolder: ViewHolder?=null
     var items: ArrayList<Venue>?=null
@@ -43,73 +41,11 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
         else viewHolder.ivPhoto?.setImageResource(R.drawable.ic_launcher_background)
         if(!item.iconCategory.isNullOrEmpty()) Picasso.get().load(item.iconCategory).placeholder(R.drawable.ic_category).into(viewHolder.ivCategory)
         else viewHolder.ivCategory?.setImageResource(R.drawable.ic_category)
-        //viewHolder.tvCost.text = "Cost: " + items[i].cost
-        //viewHolder.rating.rating = items[i].rating
-
-        /*if (itemsSelected.contains(i))
-            viewHolder.itemView.setBackgroundColor(Color.LTGRAY)
-        else
-            viewHolder.itemView.setBackgroundColor(Color.WHITE)*/
 
     }
-
-    fun startActionMode() {
-        multiSelection = true
-    }
-
-    fun destroyActionMode() {
-        multiSelection = false
-        itemsSelected.clear()
-        notifyDataSetChanged()
-    }
-
-    fun finishActionMode() {
-        val location = -1
-        for (item in itemsSelected) {
-            itemsSelected.remove(item)
-        }
-        multiSelection = false
-        notifyDataSetChanged()
-    }
-
-    fun selectItem(index: Int) {
-        var location = -1
-        if (multiSelection!!) {
-            for (i in 0 until itemsSelected.count()) {
-                if (itemsSelected[i] === index) {
-                    location = i
-                }
-            }
-            if (location != -1) {
-                itemsSelected.remove(location)
-            } else {
-                itemsSelected.add(index)
-            }
-            notifyDataSetChanged()
-        }
-    }
-
     override fun getItemCount(): Int {
         return items?.count()!!
     }
-
-    fun getItemsSelected(): Int {
-        return itemsSelected.count()
-    }
-
-    fun deleteSelected() {
-        if (itemsSelected.count() > 0) {
-            val itemsDeleted = ArrayList<Venue>()
-
-            for (index in itemsSelected) {
-                itemsDeleted.add(items?.get(index)!!)
-            }
-            items?.removeAll(itemsDeleted)
-            itemsSelected.clear()
-
-        }
-    }
-
     class ViewHolder(itemView: View, listener:ClickListener, longClickListener:LongClickListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnLongClickListener {
         var tvName: TextView?=null
         var tvState:TextView?=null
@@ -117,7 +53,6 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
         var tvCheckins:TextView?=null
         var ivPhoto:ImageView?=null
         var ivCategory:ImageView?=null
-        //var rating: RatingBar
         var listener: ClickListener?=null
         var longClickListener: LongClickListener?=null
 
@@ -128,8 +63,6 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
             tvCheckins = itemView.tvCheckins
             ivPhoto=itemView.ivPhoto
             ivCategory=itemView.imgCategory
-            //tvCost = itemView.findViewById(R.id.tvCost)
-            //rating = itemView.findViewById(R.id.rating)
             this.listener=listener
             this.longClickListener=longClickListener
             itemView.setOnClickListener(this)

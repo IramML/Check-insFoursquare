@@ -50,6 +50,7 @@ class VenuesCategories : AppCompatActivity() {
                    foursquare?.getVenues(lat, lng, categoryId, object: getVenuesInterface {
                         override fun venuesGenerated(venues: ArrayList<Venue>) {
                             implementRecyclerView(venues)
+                            location?.stopUpdateLocation()
                         }
                     })
                 }

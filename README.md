@@ -9,3 +9,4 @@ Check-ins Android application that uses:
 ## Screenshots
 ![Screenshot00](https://github.com/IramML/WeatherApp/blob/master/Images/Screenshot00.png)
 ![Screenshot01](https://github.com/IramML/WeatherApp/blob/master/Images/Screenshot01.png)
+![Screenshot02](https://github.com/IramML/WeatherApp/blob/master/Images/Screenshot02.png)
