@@ -123,21 +123,23 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
 
                 var meta=objectResonse.meta
                 var venues=objectResonse.response?.venues!!
-                for(venue in venues){
-                    getImagePreview(venue.id, object:ImagePreviewInterface{
-                        override fun getImagePreview(photos: ArrayList<Photo>) {
-                            if (photos.count()>0){
-                                val urlImage= photos.get(0).makeURLImage(getToken(), VERSION, "original")
-                                venue.imagePreview=urlImage
-                            }
-                            if (venue.categories?.count()!!>0){
-                                val urlIcon=venue.categories?.get(0)?.icon?.makeURLImage(getToken(), VERSION, "64")
-                                venue.iconCategory=urlIcon!!
-                            }
-                        }
-                    })
-                }
+
                 if(meta?.code==200){
+                    for(venue in venues){
+
+                        getImagePreview(venue.id, object:ImagePreviewInterface{
+                            override fun getImagePreview(photos: ArrayList<Photo>) {
+                                if (photos.count()>0){
+                                    val urlImage= photos.get(0).makeURLImage(getToken(), VERSION, "original")
+                                    venue.imagePreview=urlImage
+                                }
+                                if (venue.categories?.count()!!>0){
+                                    val urlIcon=venue.categories?.get(0)?.icon?.makeURLImage(getToken(), VERSION, "64")
+                                    venue.iconCategory=urlIcon!!
+                                }
+                            }
+                        })
+                    }
                     getVenuesInterface.venuesGenerated(venues)
                 }else if (meta?.code==400){
                     Message.messageError(activity.applicationContext, meta.errorDetail)
