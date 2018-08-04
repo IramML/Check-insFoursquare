@@ -5,6 +5,8 @@ Check-ins Android application that uses:
 - Volley
 - Picasso
 - Gson
+- Google maps API (Routes)
+- CircleImageView
 
 ## Screenshots
 ![Screenshot00](https://github.com/IramML/Check-insFoursquare/blob/master/Images/Screenshot00.png)
