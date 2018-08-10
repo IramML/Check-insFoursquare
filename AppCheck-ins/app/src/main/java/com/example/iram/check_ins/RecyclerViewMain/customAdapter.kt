@@ -37,8 +37,8 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
         if (item?.categories?.size!!>0) viewHolder.tvCategory?.text = item?.categories?.get(0)?.name
         else viewHolder.tvCategory?.text = "Without category"
         viewHolder.tvCheckins?.text = "Checkins: ${item?.stats?.checkinsCount.toString()}"
-        if(!item.imagePreview.isNullOrEmpty()) Picasso.get().load(item.imagePreview).placeholder(R.drawable.ic_launcher_background).into(viewHolder.ivPhoto)
-        else viewHolder.ivPhoto?.setImageResource(R.drawable.ic_launcher_background)
+        if(!item.imagePreview.isNullOrEmpty()) Picasso.get().load(item.imagePreview).placeholder(R.drawable.placeholder).into(viewHolder.ivPhoto)
+        else viewHolder.ivPhoto?.setImageResource(R.drawable.placeholder)
         if(!item.iconCategory.isNullOrEmpty()) Picasso.get().load(item.iconCategory).placeholder(R.drawable.ic_category).into(viewHolder.ivCategory)
         else viewHolder.ivCategory?.setImageResource(R.drawable.ic_category)
 
@@ -68,8 +68,6 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
             itemView.setOnClickListener(this)
             itemView.setOnLongClickListener(this)
         }
-
-
         override fun onClick(view: View?) {
             this.listener?.onClick(view!!, adapterPosition)
         }

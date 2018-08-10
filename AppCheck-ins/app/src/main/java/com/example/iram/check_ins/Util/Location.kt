@@ -44,7 +44,7 @@ class Location(var activity: AppCompatActivity, locationListener: locationListen
     }
     private fun validatePermissionsLocation():Boolean{
         val fineLocationAvailable=ActivityCompat.checkSelfPermission(activity.applicationContext, permissionFineLocation)==PackageManager.PERMISSION_GRANTED
-        val coarseLocationAvailable=ActivityCompat.checkSelfPermission(activity.applicationContext, permissionFineLocation)==PackageManager.PERMISSION_GRANTED
+        val coarseLocationAvailable=ActivityCompat.checkSelfPermission(activity.applicationContext, permissionCoarseLocation)==PackageManager.PERMISSION_GRANTED
 
         return fineLocationAvailable && coarseLocationAvailable
     }
