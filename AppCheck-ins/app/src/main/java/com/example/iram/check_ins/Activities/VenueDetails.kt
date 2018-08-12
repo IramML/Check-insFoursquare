@@ -55,8 +55,8 @@ class VenueDetails : AppCompatActivity(), OnMapReadyCallback {
         currentVenue=gson.fromJson(currentVenueString, Venue::class.java)
         initToolbar(currentVenue?.name!!)
         val listGrid=ArrayList<objectGrid>()
-        if(currentVenue?.imagePreview.isNullOrEmpty())ivPhoto?.setImageResource(R.drawable.ic_launcher_background)
-        else Picasso.get().load(currentVenue?.imagePreview).placeholder(R.drawable.ic_launcher_background).into(ivPhoto)
+        if(currentVenue?.imagePreview.isNullOrEmpty())ivPhoto?.setImageResource(R.drawable.placeholder)
+        else Picasso.get().load(currentVenue?.imagePreview).placeholder(R.drawable.placeholder).into(ivPhoto)
         tvName.text=currentVenue?.name
         tvState.text=currentVenue?.location?.state
         tvCountry.text=currentVenue?.location?.country
