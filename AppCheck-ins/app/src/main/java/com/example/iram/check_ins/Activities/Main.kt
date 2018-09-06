@@ -23,7 +23,6 @@ import com.example.iram.check_ins.RecyclerViewMain.LongClickListener
 import com.example.iram.check_ins.RecyclerViewMain.customAdapter
 import com.google.gson.Gson
 
-
 class Main : AppCompatActivity() {
     var location: Location?=null
     var foursquare:Foursquare?=null

@@ -1,8 +1,5 @@
 package com.example.iram.check_ins.RecyclerViewMain
 
-import android.content.Context
-import android.graphics.Color
-import android.widget.RatingBar
 import android.widget.TextView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -34,13 +31,12 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
         var item=items?.get(i)
         viewHolder.tvName?.text = item?.name
         viewHolder.tvState?.text ="State: ${item?.location?.state}"
-        if (item?.categories?.size!!>0) viewHolder.tvCategory?.text = item?.categories?.get(0)?.name
-        else viewHolder.tvCategory?.text = "Without category"
+        viewHolder.tvCategory?.text = item?.categories?.get(0)?.name
         viewHolder.tvCheckins?.text = "Checkins: ${item?.stats?.checkinsCount.toString()}"
-        if(!item.imagePreview.isNullOrEmpty()) Picasso.get().load(item.imagePreview).placeholder(R.drawable.placeholder).into(viewHolder.ivPhoto)
-        else viewHolder.ivPhoto?.setImageResource(R.drawable.placeholder)
-        if(!item.iconCategory.isNullOrEmpty()) Picasso.get().load(item.iconCategory).placeholder(R.drawable.ic_category).into(viewHolder.ivCategory)
-        else viewHolder.ivCategory?.setImageResource(R.drawable.ic_category)
+        if(!item?.imagePreview.isNullOrEmpty())
+            Picasso.get().load(item?.imagePreview).placeholder(R.drawable.placeholder).into(viewHolder.ivPhoto)
+        if(!item?.iconCategory.isNullOrEmpty())
+            Picasso.get().load(item?.iconCategory).placeholder(R.drawable.ic_category).into(viewHolder.ivCategory)
 
     }
     override fun getItemCount(): Int {
