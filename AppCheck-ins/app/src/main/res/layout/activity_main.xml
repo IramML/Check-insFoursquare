@@ -14,8 +14,24 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/Theme.AppCompat.Light"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvVenues"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:minHeight="?actionBarSize"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/primaryDarkColor"
+        app:tabTextColor="@color/primaryTextColor"
+        app:tabIndicatorHeight="4dp"
+        app:tabBackground="@color/primaryLightColor"
+        app:tabMode="fixed"
+        >
+    </android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        >
+    </android.support.v4.view.ViewPager>
 </LinearLayout>

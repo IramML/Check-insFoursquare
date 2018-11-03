@@ -3,7 +3,8 @@ package com.example.iram.check_ins.Activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import android.support.design.widget.TabLayout
+import android.support.v4.view.ViewPager
 import android.util.Log
 import com.example.iram.check_ins.Fourscuare.Foursquare
 import com.example.iram.check_ins.Fourscuare.Venue
@@ -16,22 +17,24 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
+import com.example.iram.check_ins.Fourscuare.Category
+import com.example.iram.check_ins.Fragments.*
 import com.example.iram.check_ins.Interfaces.VenuesLikesInterface
-import com.example.iram.check_ins.RecyclerViewMain.ClickListener
-import com.example.iram.check_ins.RecyclerViewMain.LongClickListener
-import com.example.iram.check_ins.RecyclerViewMain.customAdapter
-import com.google.gson.Gson
+import com.example.iram.check_ins.Interfaces.categoriesVenuesInterface
 
 class Main : AppCompatActivity() {
+    private var adapter: TabAdapter? = null
+    private var tabLayout: TabLayout? = null
+    private var viewPager: ViewPager? = null
     var location: Location?=null
     var foursquare:Foursquare?=null
 
-    var adapterCustom: customAdapter? = null
+
     var list:RecyclerView? = null
     var layoutManager:RecyclerView.LayoutManager? = null
 
     var toolbar:Toolbar?=null
+    val activity:AppCompatActivity=this
     companion object {
         val CURRENT_VENUE="checkins.Main"
     }
@@ -40,13 +43,24 @@ class Main : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initToolbar()
-        list=findViewById(R.id.rvVenues)
-        list?.setHasFixedSize(true)
-        layoutManager=LinearLayoutManager(this)
-        list?.layoutManager=layoutManager
+        initTabs()
+
 
         foursquare=Foursquare(this, this)
         if(foursquare?.tokenAvailable()!!){
+            foursquare?.loadCategories(object: categoriesVenuesInterface {
+                override fun categoriesVenues(categories: ArrayList<Category>) {
+                    Log.d("CATEGORIES", categories.count().toString())
+                    CategoriesFragment.implementRecyclerView(categories, activity)
+                }
+
+            })
+            foursquare?.getLikeVenues(object: VenuesLikesInterface {
+                override fun venuesGenerated(venues: ArrayList<Venue>) {
+                    Log.d("LIKES", venues.count().toString())
+                    LikesFragment.implementRecyclerView(venues, activity)
+                }
+            })
             location= com.example.iram.check_ins.Util.Location(this, object:locationListener{
                 override fun locationResponse(locationResult: LocationResult) {
                     val lat=locationResult.lastLocation.latitude.toString()
@@ -54,7 +68,7 @@ class Main : AppCompatActivity() {
 
                     foursquare?.getVenues(lat, lng, object:getVenuesInterface{
                         override fun venuesGenerated(venues: ArrayList<Venue>) {
-                            implementRecyclerView(venues)
+                            VenuesFragment.implementRecyclerView(venues, activity)
                             location?.stopUpdateLocation()
                         }
                     })
@@ -64,24 +78,16 @@ class Main : AppCompatActivity() {
         }else foursquare?.sendLogin()
 
     }
-    private fun implementRecyclerView(venuesList:ArrayList<Venue>){
-        adapterCustom = customAdapter(venuesList, object : ClickListener{
-            override fun onClick(view: View, index: Int) {
-                val venueToJson=Gson()
-                val currentVenueString=venueToJson.toJson(venuesList.get(index))
-                val intent=Intent(applicationContext, VenueDetails::class.java)
-                intent.putExtra(CURRENT_VENUE, currentVenueString)
-                startActivity(intent)
-            }
 
-        }, object : LongClickListener{
-            override fun longClick(view: View, index: Int) { }
-        })
-        list?.adapter=adapterCustom
-    }
-    override fun onStart() {
-        super.onStart()
-        location?.inicializeLocation()
+    private fun initTabs() {
+        viewPager = findViewById(R.id.pager) as ViewPager
+        tabLayout = findViewById(R.id.tabLayout)
+        adapter = TabAdapter(supportFragmentManager)
+        adapter?.addFragment(VenuesFragment(), "Venues")
+        adapter?.addFragment(CategoriesFragment(), "Categories")
+        adapter?.addFragment(LikesFragment(), "Likes")
+        viewPager?.adapter = adapter
+        tabLayout?.setupWithViewPager(viewPager)
     }
 
     override fun onPause() {
@@ -103,16 +109,6 @@ class Main : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
-            R.id.ic_Categories->{
-                val intent=Intent(this, Categories::class.java)
-                startActivity(intent)
-                return true
-            }
-            R.id.ic_Favorites->{
-                val intent=Intent(this, Likes::class.java)
-                startActivity(intent)
-                return true
-            }
             R.id.ic_profile->{
                 val intent=Intent(this, Profile::class.java)
                 startActivity(intent)
@@ -128,5 +124,9 @@ class Main : AppCompatActivity() {
             else->return super.onOptionsItemSelected(item)
         }
 
+    }
+    override fun onStart() {
+        super.onStart()
+        location?.inicializeLocation()
     }
 }

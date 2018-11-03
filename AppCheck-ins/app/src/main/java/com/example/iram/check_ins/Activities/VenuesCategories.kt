@@ -10,6 +10,7 @@ import android.view.View
 import com.example.iram.check_ins.Fourscuare.Category
 import com.example.iram.check_ins.Fourscuare.Foursquare
 import com.example.iram.check_ins.Fourscuare.Venue
+import com.example.iram.check_ins.Fragments.CategoriesFragment
 import com.example.iram.check_ins.Interfaces.getVenuesInterface
 import com.example.iram.check_ins.Interfaces.locationListener
 import com.example.iram.check_ins.R
@@ -20,7 +21,7 @@ import com.example.iram.check_ins.Util.Location
 import com.google.android.gms.location.LocationResult
 import com.google.gson.Gson
 
-class VenuesCategories : AppCompatActivity() {
+class enuesCategories : AppCompatActivity() {
     var location: Location?=null
     var foursquare: Foursquare?=null
 
@@ -35,7 +36,7 @@ class VenuesCategories : AppCompatActivity() {
 
         initRecyclerView()
 
-        val currentCategoryString=intent.getStringExtra(Categories.CURRENT_CATEGORY)
+        val currentCategoryString=intent.getStringExtra(CategoriesFragment.CURRENT_CATEGORY)
         val gson=Gson()
         val currentCategory=gson.fromJson(currentCategoryString, Category::class.java)
         initToolbar(currentCategory.name)
