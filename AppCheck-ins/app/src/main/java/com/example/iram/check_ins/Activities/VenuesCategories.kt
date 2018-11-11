@@ -21,7 +21,7 @@ import com.example.iram.check_ins.Util.Location
 import com.google.android.gms.location.LocationResult
 import com.google.gson.Gson
 
-class enuesCategories : AppCompatActivity() {
+class VenuesCategories : AppCompatActivity() {
     var location: Location?=null
     var foursquare: Foursquare?=null
 

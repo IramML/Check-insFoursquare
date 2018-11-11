@@ -15,7 +15,7 @@ class GoogleMapsAPI(var activity:AppCompatActivity){
         val origin="origin="+currentLocation.latitude+","+currentLocation.longitude+"&"
         val destination="destination="+coordinates.latitude+","+coordinates.longitude+"&"
         val parameters=origin+destination+"sensor=false&mode=driving"
-        val url="http://maps.googleapis.com/maps/api/directions/json?$parameters&key=AIzaSyDDl_qBHjnY3OZ2zRjTp7OVOlsZsK7Mb6E"
+        val url="https://maps.googleapis.com/maps/api/directions/json?$parameters&key=AIzaSyDDl_qBHjnY3OZ2zRjTp7OVOlsZsK7Mb6E"
         Log.d("URL_ROUTE", url)
         network.httpRequest(activity.applicationContext, url, object:HttpResponse{
             override fun httpResponseSuccess(response: String) {

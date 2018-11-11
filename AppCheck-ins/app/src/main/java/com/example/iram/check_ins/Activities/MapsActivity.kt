@@ -67,6 +67,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val venueLocation:LatLng= LatLng(latVenue!!, lngVenue!!)
                 googleMapsAPI?.getRoute(currentLocation, venueLocation, object:getRouteInterface{
                     override fun getRoute(json: String) {
+                        Log.d("JSON_ROUTE", json)
                         val coordinates:PolylineOptions=getCoordinates(json)
                         if (currentRoute!=null){
                             currentRoute?.remove()

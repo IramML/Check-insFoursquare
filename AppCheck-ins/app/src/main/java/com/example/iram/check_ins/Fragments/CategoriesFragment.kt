@@ -32,7 +32,7 @@ class CategoriesFragment : Fragment() {
                         val categoryToJson = Gson()
                         val currentCategoryString = categoryToJson.toJson(categoriesList.get(index))
                         val intent = Intent(activity.applicationContext, VenuesCategories::class.java)
-                        intent.putExtra(Categories.CURRENT_CATEGORY, currentCategoryString)
+                        intent.putExtra(CategoriesFragment.CURRENT_CATEGORY, currentCategoryString)
                         activity.startActivity(intent)
                     }
 
