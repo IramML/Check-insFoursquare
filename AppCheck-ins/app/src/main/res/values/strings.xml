@@ -2,6 +2,7 @@
     <string name="app_name">Check-ins</string>
     <string name="app_categories">Categories</string>
     <string name="app_favorites">Likes</string>
+    <string name="app_map">Routes</string>
     <string name="title_activity_maps">Map</string>
 
     <!-- TODO: Remove or change this placeholder text -->

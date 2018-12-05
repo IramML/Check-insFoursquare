@@ -20,7 +20,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
     private val CODE_TOKEN_EXCHANGE=201
 
     private val CLIENT_ID="GASUFJU4LJJEPKBI5WRAOO42RO01G3BM3QCJI4H1T13K0S1G"
-    private val CLIENT_SECRET="LH2UVZN0QAPNMU5AF0N0YMJUUBKP3CBQ3EVKEQCU3SOENCAC"
+    private val CLIENT_SECRET="CNCD0AKIXQXDPMLX3UZOIM3FHSE2RGXPGZSI0IIDRFBWGT4V"
 
     private val SETTINGS="settings"
     private val ACCESS_TOKEN="accessToken"
@@ -115,18 +115,18 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
         val method="search/"
         val ll="ll=$lat,$lng"
         val token="oauth_token=${getToken()}"
-        val url="$URL_BASE$section$method?limit=10&$ll&$token&$VERSION"
+        val url="$URL_BASE$section$method?limit=2&$ll&$token&$VERSION"
+        Log.d("URL",url)
         network.httpRequest(activity.applicationContext, url, object:HttpResponse{
             override fun httpResponseSuccess(response: String) {
                 var gson= Gson()
                 var objectResonse=gson.fromJson(response, FoursquareAPIRequestVenues::class.java)
-
+                Log.d("VENUES", response)
                 var meta=objectResonse.meta
                 var venues=objectResonse.response?.venues!!
 
                 if(meta?.code==200){
                     for(venue in venues){
-
                         getImagePreview(venue.id, object:ImagePreviewInterface{
                             override fun getImagePreview(photos: ArrayList<Photo>) {
                                 if (photos.count()>0){
@@ -137,6 +137,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
                                     val urlIcon=venue.categories?.get(0)?.icon?.makeURLImage(getToken(), VERSION, "64")
                                     venue.iconCategory=urlIcon!!
                                 }
+
                             }
                         })
                     }
@@ -182,7 +183,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
         val network=Network(activity)
         val section="venues/"
         val method="photos/"
-        val token="oauth_token= ${getToken()}"
+        val token="oauth_token=${getToken()}"
         val parameters="limit=1"
         val url="$URL_BASE$section$venueId/$method?$parameters&$token&$VERSION"
         network.httpRequest(activity.applicationContext, url, object:HttpResponse{

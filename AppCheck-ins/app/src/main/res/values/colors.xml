@@ -12,4 +12,9 @@
     <color name="secondaryDarkColor">#0088a3</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
+
+    <color name="grid1Color">#A80C25</color>
+    <color name="grid2Color">#33383E</color>
+    <color name="grid3Color">#1E4154</color>
+    <color name="grid4Color">#495A27</color>
 </resources>

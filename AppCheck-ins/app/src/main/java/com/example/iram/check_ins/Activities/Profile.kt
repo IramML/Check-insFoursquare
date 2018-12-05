@@ -37,10 +37,10 @@ class Profile : AppCompatActivity() {
                     tvName.text=user.firstName
                     Picasso.get().load(user.photo?.urlIcon).into(profileImage)
                     val listGrid=ArrayList<objectGrid>()
-                    listGrid.add(objectGrid("Photos ${NumberFormat.getNumberInstance(Locale.US).format(user.photos?.count)}", R.drawable.ic_grid_photo, ContextCompat.getColor(applicationContext, R.color.secondaryColor)))
-                    listGrid.add(objectGrid("Checkins: ${NumberFormat.getNumberInstance(Locale.US).format(user.checkins?.count)}", R.drawable.ic_grid_checkins, ContextCompat.getColor(applicationContext, R.color.primaryLightColor)))
-                    listGrid.add(objectGrid("Friends: ${NumberFormat.getNumberInstance(Locale.US).format(user.friends?.count)}", R.drawable.ic_grid_users, ContextCompat.getColor(applicationContext, R.color.primaryColor)))
-                    listGrid.add(objectGrid("Tips: ${NumberFormat.getNumberInstance(Locale.US).format(user.tips?.count)}", R.drawable.ic_grid_tips, ContextCompat.getColor(applicationContext, R.color.secondaryLightColor)))
+                    listGrid.add(objectGrid("Photos ${NumberFormat.getNumberInstance(Locale.US).format(user.photos?.count)}", R.drawable.ic_grid_photo, ContextCompat.getColor(applicationContext, R.color.grid1Color)))
+                    listGrid.add(objectGrid("Checkins: ${NumberFormat.getNumberInstance(Locale.US).format(user.checkins?.count)}", R.drawable.ic_grid_checkins, ContextCompat.getColor(applicationContext, R.color.grid2Color)))
+                    listGrid.add(objectGrid("Friends: ${NumberFormat.getNumberInstance(Locale.US).format(user.friends?.count)}", R.drawable.ic_grid_users, ContextCompat.getColor(applicationContext, R.color.grid3Color)))
+                    listGrid.add(objectGrid("Tips: ${NumberFormat.getNumberInstance(Locale.US).format(user.tips?.count)}", R.drawable.ic_grid_tips, ContextCompat.getColor(applicationContext, R.color.grid4Color)))
                     val adapter= adapterGridView(applicationContext, listGrid)
                     grid.adapter=adapter
                 }

@@ -1,6 +1,8 @@
 package com.example.iram.check_ins.Activities
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -22,10 +24,13 @@ import com.example.iram.check_ins.Fragments.*
 import com.example.iram.check_ins.Interfaces.VenuesLikesInterface
 import com.example.iram.check_ins.Interfaces.categoriesVenuesInterface
 
+
+
 class Main : AppCompatActivity() {
     private var adapter: TabAdapter? = null
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
+    private val tabIcons = intArrayOf(R.drawable.ic_grid_checkins, R.drawable.ic_category, R.drawable.ic_favorites)
     var location: Location?=null
     var foursquare:Foursquare?=null
 
@@ -88,6 +93,18 @@ class Main : AppCompatActivity() {
         adapter?.addFragment(LikesFragment(), "Likes")
         viewPager?.adapter = adapter
         tabLayout?.setupWithViewPager(viewPager)
+        setupTabIcons()
+
+    }
+
+    private fun setupTabIcons() {
+        tabLayout?.getTabAt(0)?.setIcon(tabIcons[0])
+        tabLayout?.getTabAt(1)?.setIcon(tabIcons[1])
+        tabLayout?.getTabAt(2)?.setIcon(tabIcons[2])
+
+        tabLayout?.getTabAt(0)?.getIcon()?.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
+        tabLayout?.getTabAt(1)?.getIcon()?.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
+        tabLayout?.getTabAt(2)?.getIcon()?.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
     }
 
     override fun onPause() {

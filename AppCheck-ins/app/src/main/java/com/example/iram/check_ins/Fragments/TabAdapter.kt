@@ -21,7 +21,7 @@ class TabAdapter(fm: FragmentManager):FragmentStatePagerAdapter(fm) {
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return mFragmentTitleList[position]
+        return null
     }
 
     override fun getCount(): Int {

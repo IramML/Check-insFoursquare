@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/secondaryColor</item>
         <item name="android:buttonStyle">@style/AppTheme.Button</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
         <item name="android:colorButtonNormal">@color/secondaryColor</item>
@@ -18,5 +19,14 @@
     <style name="AlertDialogCustom" parent="android:Theme.Material.Light.Dialog.Alert">
         <item name="android:colorPrimary">@color/secondaryColor</item>
         <item name="android:colorAccent">@color/secondaryLightColor</item>
+    </style>
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialog</item>
     </style>
 </resources>

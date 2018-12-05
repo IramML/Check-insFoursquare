@@ -47,7 +47,7 @@ open class Icon{
     fun makeURLImage(tokenAccess:String, version:String, size:String):String{
         val prefix=prefix
         val suffix=suffix
-        val token="oauth_token= $tokenAccess"
+        val token="oauth_token=$tokenAccess"
         val url="$prefix$size$suffix?$token&$version"
         urlIcon=url
         return url

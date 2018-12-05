@@ -47,7 +47,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         lngVenue=intent.getDoubleExtra("LNG", 151.0)
         name=intent.getStringExtra("NAME")
         googleMapsAPI=GoogleMapsAPI(this)
-        Toast.makeText(applicationContext, "Wait a moment", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "Tracing route...", Toast.LENGTH_SHORT).show()
         location= Location(this, object:locationListener{
             @SuppressLint("MissingPermission")
             override fun locationResponse(locationResult: LocationResult) {
@@ -72,6 +72,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         if (currentRoute!=null){
                             currentRoute?.remove()
                         }
+                        if(coordinates!=null)
                         currentRoute=mMap.addPolyline(coordinates)
                     }
 
@@ -102,7 +103,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
     fun initToolbar(){
         toolbar=findViewById(R.id.toolbar)
-        toolbar?.setTitle(R.string.app_categories)
+        toolbar?.setTitle(R.string.app_map)
         setSupportActionBar(toolbar)
         var actionBar=supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)

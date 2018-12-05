@@ -12,5 +12,5 @@ Check-ins Android application that uses:
 
 |   |   |
 |---|---|
-|![Screenshot00](https://github.com/IramML/Check-insFoursquare/blob/master/Images/Screenshot00.png) |![Screenshot01](https://github.com/IramML/Check-insFoursquare/blob/master/Images/Screenshot01.png)|
-|![Screenshot02](https://github.com/IramML/Check-insFoursquare/blob/master/Images/Screenshot02.png)|![Screenshot03](https://github.com/IramML/Check-insFoursquare/blob/master/Images/Screenshot03.png)|
+|![Screenshot00](Images/Screenshot00.png) |![Screenshot01](Images/Screenshot01.png)|
+|![Screenshot02](Images/Screenshot02.png)|![Screenshot03](Images/Screenshot04.png)|

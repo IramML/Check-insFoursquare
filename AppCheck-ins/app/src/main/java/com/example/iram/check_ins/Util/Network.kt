@@ -20,6 +20,7 @@ class Network(var activity: AppCompatActivity){
     }
     fun httpRequest(context: Context, url:String, httpResponse: HttpResponse){
         if(availableNetwok()) {
+            Log.d("URL_SERVICE","$activity $url")
             val queue = Volley.newRequestQueue(context)
 
             val request = StringRequest(Request.Method.GET, url, Response.Listener<String> { response ->
