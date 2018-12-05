@@ -6,8 +6,8 @@ import android.support.annotation.Nullable
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import com.example.iram.check_ins.Fourscuare.Foursquare
 import com.example.iram.check_ins.Fourscuare.Venue
 import com.example.iram.check_ins.R
@@ -16,7 +16,7 @@ import java.net.URLEncoder
 class BottomSheetCheckinFragment: BottomSheetDialogFragment(){
     var mTag: String? = null
     var etComent: EditText?=null
-    var btnCheckin: Button?=null
+    var btnCheckin: ImageButton?=null
 
     var view0: View?=null
     var foursquare:Foursquare?=null
@@ -44,7 +44,7 @@ class BottomSheetCheckinFragment: BottomSheetDialogFragment(){
     override fun onCreateView(inflater: LayoutInflater, @Nullable container: ViewGroup?, @Nullable savedInstanceState: Bundle?): View? {
         view0= inflater.inflate(R.layout.bottom_sheet_checkin, container, false)
         etComent=view0?.findViewById(R.id.etComent) as EditText
-        btnCheckin=view0?.findViewById(R.id.btnCkeckin) as Button
+        btnCheckin=view0?.findViewById(R.id.btnCkeckin) as ImageButton
         return view0
     }
 }

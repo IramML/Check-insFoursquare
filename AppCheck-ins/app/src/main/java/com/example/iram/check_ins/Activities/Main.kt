@@ -23,6 +23,9 @@ import com.example.iram.check_ins.Fourscuare.Category
 import com.example.iram.check_ins.Fragments.*
 import com.example.iram.check_ins.Interfaces.VenuesLikesInterface
 import com.example.iram.check_ins.Interfaces.categoriesVenuesInterface
+import com.example.iram.check_ins.R.id.tabLayout
+
+
 
 
 
@@ -95,6 +98,38 @@ class Main : AppCompatActivity() {
         tabLayout?.setupWithViewPager(viewPager)
         setupTabIcons()
 
+        viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                when (position) {
+                    0 -> {
+                        viewPager?.setCurrentItem(0)
+                        toolbar?.setTitle("Venues")
+                    }
+                    1 -> {
+                        viewPager?.setCurrentItem(1)
+                        toolbar?.setTitle("Categories")
+                    }
+                    2 -> {
+                        viewPager?.setCurrentItem(2)
+                        toolbar?.setTitle("Likes")
+                    }
+
+                    else -> {
+
+                        viewPager?.setCurrentItem(position)
+                        toolbar?.setTitle("Venues")
+                    }
+                }
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+        })
     }
 
     private fun setupTabIcons() {
@@ -116,7 +151,7 @@ class Main : AppCompatActivity() {
     }
     fun initToolbar(){
         toolbar=findViewById(R.id.toolbar)
-        toolbar?.setTitle(R.string.app_name)
+        toolbar?.setTitle(R.string.app_main)
         setSupportActionBar(toolbar)
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

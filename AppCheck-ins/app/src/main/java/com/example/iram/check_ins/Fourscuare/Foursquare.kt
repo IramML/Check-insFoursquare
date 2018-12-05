@@ -115,7 +115,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
         val method="search/"
         val ll="ll=$lat,$lng"
         val token="oauth_token=${getToken()}"
-        val url="$URL_BASE$section$method?limit=2&$ll&$token&$VERSION"
+        val url="$URL_BASE$section$method?limit=1&$ll&$token&$VERSION"
         Log.d("URL",url)
         network.httpRequest(activity.applicationContext, url, object:HttpResponse{
             override fun httpResponseSuccess(response: String) {
@@ -137,7 +137,6 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
                                     val urlIcon=venue.categories?.get(0)?.icon?.makeURLImage(getToken(), VERSION, "64")
                                     venue.iconCategory=urlIcon!!
                                 }
-
                             }
                         })
                     }
@@ -159,7 +158,7 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
         val ll="ll=$lat,$lng"
         val category="categoryId=$idCategory"
         val token="oauth_token=${getToken()}"
-        val url="$URL_BASE$section$method?limit=10&$ll&$category&$token&$VERSION"
+        val url="$URL_BASE$section$method?limit=1&$ll&$category&$token&$VERSION"
         network.httpRequest(activity.applicationContext, url, object:HttpResponse{
             override fun httpResponseSuccess(response: String) {
                 var gson= Gson()
