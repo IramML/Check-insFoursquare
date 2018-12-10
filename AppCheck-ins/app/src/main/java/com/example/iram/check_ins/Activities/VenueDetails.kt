@@ -64,9 +64,9 @@ class VenueDetails : AppCompatActivity(), OnMapReadyCallback {
         tvCountry.text=currentVenue?.location?.country
 
         listGrid.add(objectGrid("${currentVenue?.categories?.get(0)?.name!!}", R.drawable.ic_grid_categories, ContextCompat.getColor(this, R.color.grid1Color)))
-        listGrid.add(objectGrid("Checkins: ${NumberFormat.getNumberInstance(Locale.US).format(currentVenue?.stats?.checkinsCount)}", R.drawable.ic_grid_checkins, ContextCompat.getColor(this, R.color.grid2Color)))
-        listGrid.add(objectGrid("Users: ${NumberFormat.getNumberInstance(Locale.US).format(currentVenue?.stats?.usersCount)}", R.drawable.ic_grid_users, ContextCompat.getColor(this, R.color.grid3Color)))
-        listGrid.add(objectGrid("Tips: ${NumberFormat.getNumberInstance(Locale.US).format(currentVenue?.stats?.tipCount)}", R.drawable.ic_grid_tips, ContextCompat.getColor(this, R.color.grid4Color)))
+        listGrid.add(objectGrid("${resources.getString(R.string.checkins_grid)}: ${NumberFormat.getNumberInstance(Locale.US).format(currentVenue?.stats?.checkinsCount)}", R.drawable.ic_grid_checkins, ContextCompat.getColor(this, R.color.grid2Color)))
+        listGrid.add(objectGrid("${resources.getString(R.string.users_grid)}: ${NumberFormat.getNumberInstance(Locale.US).format(currentVenue?.stats?.usersCount)}", R.drawable.ic_grid_users, ContextCompat.getColor(this, R.color.grid3Color)))
+        listGrid.add(objectGrid("${resources.getString(R.string.tips_grid)}: ${NumberFormat.getNumberInstance(Locale.US).format(currentVenue?.stats?.tipCount)}", R.drawable.ic_grid_tips, ContextCompat.getColor(this, R.color.grid4Color)))
         val adapter=adapterGridView(this, listGrid)
         grid.adapter=adapter
         val foursquare=Foursquare(this, VenueDetails())

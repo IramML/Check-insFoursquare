@@ -2,6 +2,7 @@ package com.example.iram.check_ins.Messages
 
 import android.content.Context
 import android.widget.Toast
+import com.example.iram.check_ins.R
 
 class Message {
     companion object {
@@ -9,13 +10,16 @@ class Message {
             var str=""
             when(message){
                 Messages.RATIONALE->{
-                    str="Permission is required to obtain location"
+                    str=context.resources.getString(R.string.rationale_location)
                 }
                 Messages.CHECKIN_SUCCESS->{
-                    str="Check-in added"
+                    str=context.resources.getString(R.string.checkin_success)
                 }
                 Messages.LIKE_SUCCESS->{
-                    str="New like added"
+                    str=context.resources.getString(R.string.like_success)
+                }
+                Messages.TRACING_ROUTE->{
+                    str=context.resources.getString(R.string.tracing_route)
                 }
             }
             Toast.makeText(context, str, Toast.LENGTH_SHORT).show()
@@ -24,28 +28,28 @@ class Message {
              var message=""
             when(errors){
                 Errors.NO_NETWORK_AVAILABLE->{
-                    message="No network available"
+                    message=context.resources.getString(R.string.no_network)
                 }
                 Errors.HTTP_ERROR->{
-                    message="There was an error with the http request"
+                    message=context.resources.getString(R.string.http_error)
                 }
                 Errors.NO_APP_FOURSQUARE_AVAILABLE->{
-                    message="The foursquare application is not installed"
+                    message=context.resources.getString(R.string.no_app_foursquare)
                 }
                 Errors.ERROR_CONNECTION_FSQR->{
-                    message="Could not complete the connection to Foursquare"
+                    message=context.resources.getString(R.string.error_connection_fsqr)
                 }
                 Errors.ERROR_EXCHANGE_TOKEN->{
-                    message="Could not complete the exchange token in Foursquare"
+                    message=context.resources.getString(R.string.error_exchange)
                 }
                 Errors.ERROR_SAVE_TOKEN->{
-                    message="Could not save token"
+                    message=context.resources.getString(R.string.error_save_token)
                 }
                 Errors.PERMISSION_DENIED->{
-                    message="You did not give permissions to get location"
+                    message=context.resources.getString(R.string.permission_denied)
                 }
                 Errors.ERROR_QUERY->{
-                    message="There was a problem in the API request"
+                    message=context.resources.getString(R.string.error_query)
                 }
             }
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()

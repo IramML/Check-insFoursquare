@@ -11,6 +11,8 @@ import com.example.iram.check_ins.GoogleMaps.GoogleMapsAPI
 import com.example.iram.check_ins.GoogleMaps.GoogleMapsAPIRequest
 import com.example.iram.check_ins.Interfaces.getRouteInterface
 import com.example.iram.check_ins.Interfaces.locationListener
+import com.example.iram.check_ins.Messages.Message
+import com.example.iram.check_ins.Messages.Messages
 import com.example.iram.check_ins.R
 import com.example.iram.check_ins.Util.Location
 import com.google.android.gms.location.LocationResult
@@ -47,7 +49,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         lngVenue=intent.getDoubleExtra("LNG", 151.0)
         name=intent.getStringExtra("NAME")
         googleMapsAPI=GoogleMapsAPI(this)
-        Toast.makeText(applicationContext, "Tracing route...", Toast.LENGTH_SHORT).show()
+        Message.message(this, Messages.TRACING_ROUTE)
         location= Location(this, object:locationListener{
             @SuppressLint("MissingPermission")
             override fun locationResponse(locationResult: LocationResult) {

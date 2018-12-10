@@ -49,12 +49,6 @@ class VenuesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         view0=inflater.inflate(R.layout.fragment_venues, container, false)
-        /* foursquare?.getVenues(lat, lng, object: getVenuesInterface {
-              override fun venuesGenerated(venues: ArrayList<Venue>) {
-                  implementRecyclerView(venues)
-                  location?.stopUpdateLocation()
-              }
-          })*/
         return view0
 
     }

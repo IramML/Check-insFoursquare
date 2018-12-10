@@ -30,9 +30,9 @@ class customAdapter(items: ArrayList<Venue>, var listener: ClickListener, var lo
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         var item=items?.get(i)
         viewHolder.tvName?.text = item?.name
-        viewHolder.tvState?.text ="State: ${item?.location?.state}"
+        viewHolder.tvState?.text ="${viewHolder.tvState?.context?.resources?.getString(R.string.state)}: ${item?.location?.state}"
         viewHolder.tvCategory?.text = item?.categories?.get(0)?.name
-        viewHolder.tvCheckins?.text = "Checkins: ${item?.stats?.checkinsCount.toString()}"
+        viewHolder.tvCheckins?.text = "${viewHolder.tvCheckins?.context?.resources?.getString(R.string.checkins)}: ${item?.stats?.checkinsCount.toString()}"
         if(!item?.imagePreview.isNullOrEmpty())
             Picasso.get().load(item?.imagePreview).placeholder(R.drawable.placeholder).into(viewHolder.ivPhoto)
         if(!item?.iconCategory.isNullOrEmpty())

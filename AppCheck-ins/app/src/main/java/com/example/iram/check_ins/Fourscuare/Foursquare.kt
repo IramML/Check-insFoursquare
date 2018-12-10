@@ -137,10 +137,11 @@ class Foursquare(var activity:AppCompatActivity, var destinyActivity:AppCompatAc
                                     val urlIcon=venue.categories?.get(0)?.icon?.makeURLImage(getToken(), VERSION, "64")
                                     venue.iconCategory=urlIcon!!
                                 }
+                                getVenuesInterface.venuesGenerated(venues)
                             }
                         })
                     }
-                    getVenuesInterface.venuesGenerated(venues)
+
                 }else if (meta?.code==400){
                     Message.messageError(activity.applicationContext, meta.errorDetail)
                 }else{

@@ -25,10 +25,6 @@ import com.example.iram.check_ins.Interfaces.VenuesLikesInterface
 import com.example.iram.check_ins.Interfaces.categoriesVenuesInterface
 import com.example.iram.check_ins.R.id.tabLayout
 
-
-
-
-
 class Main : AppCompatActivity() {
     private var adapter: TabAdapter? = null
     private var tabLayout: TabLayout? = null
@@ -107,27 +103,23 @@ class Main : AppCompatActivity() {
                 when (position) {
                     0 -> {
                         viewPager?.setCurrentItem(0)
-                        toolbar?.setTitle("Venues")
+                        toolbar?.setTitle(resources.getString(R.string.app_main))
                     }
                     1 -> {
                         viewPager?.setCurrentItem(1)
-                        toolbar?.setTitle("Categories")
+                        toolbar?.setTitle(resources.getString(R.string.app_categories))
                     }
                     2 -> {
                         viewPager?.setCurrentItem(2)
-                        toolbar?.setTitle("Likes")
+                        toolbar?.setTitle(R.string.app_favorites)
                     }
-
                     else -> {
-
                         viewPager?.setCurrentItem(position)
-                        toolbar?.setTitle("Venues")
+                        toolbar?.setTitle(resources.getString(R.string.app_main))
                     }
                 }
             }
-
             override fun onPageScrollStateChanged(state: Int) {
-
             }
         })
     }
