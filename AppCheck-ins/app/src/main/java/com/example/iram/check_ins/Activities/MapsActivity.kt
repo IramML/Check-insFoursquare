@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.widget.Toast
 import com.example.iram.check_ins.GoogleMaps.GoogleMapsAPI
 import com.example.iram.check_ins.GoogleMaps.GoogleMapsAPIRequest
 import com.example.iram.check_ins.Interfaces.getRouteInterface
@@ -63,7 +62,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 val currentMarker = mMap.addMarker(MarkerOptions()
                         .position(currentLocation)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.current_location)))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_current_location)))
 
 
                 val venueLocation:LatLng= LatLng(latVenue!!, lngVenue!!)

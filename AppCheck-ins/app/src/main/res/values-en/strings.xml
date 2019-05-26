@@ -1,48 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">Check-ins</string>
-    <string name="app_main">Venues</string>
+    <!--Bottom sheet fragment-->
+    <string name="add_checkin">Add new ckeckin</string>
+
     <string name="app_categories">Categories</string>
+
     <string name="app_favorites">Likes</string>
+
+    <string name="app_main">Venues</string>
+
     <string name="app_map">Routes</string>
-    <string name="title_activity_maps">Map</string>
 
-    <!--Messages-->
-    <!--Ordinary messages-->
-    <string name="rationale_location">Permission is required to obtain location</string>
+    <string name="app_name">Check-ins</string>
+
     <string name="checkin_success">Check-in added</string>
-    <string name="like_success">New like added</string>
-    <string name="tracing_route">Tracing route&#8230;</string>
 
-    <!--Error messages-->
-    <string name="no_network">No network available</string>
-    <string name="http_error">There was an error with the http request</string>
-    <string name="no_app_foursquare">The foursquare application is not installed</string>
+    <!--Main custom adapter-->
+    <string name="checkins">Checkins</string>
+
+    <!--Grid venues-->
+    <string name="checkins_grid">Checkins</string>
+
+    <string name="checkins_profile">Checkins</string>
+
+    <string name="comment_checkin">Comment (Optional)</string>
+
     <string name="error_connection_fsqr">Could not complete the connection to Foursquare</string>
+
     <string name="error_exchange">Could not complete the exchange token in Foursquare</string>
-    <string name="error_save_token">Could not save token</string>
-    <string name="permission_denied">You did not give permissions to get location</string>
+
     <string name="error_query">There was a problem in the API request</string>
+
+    <string name="error_save_token">Could not save token</string>
+
+    <string name="friends_profile">Friends</string>
+
+    <string name="http_error">There was an error with the http request</string>
+
+    <string name="like_success">New like added</string>
 
     <!--Login activity-->
     <string name="login_foursquare">Login with Foursquare</string>
 
+    <string name="no_app_foursquare">The foursquare application is not installed</string>
+
+    <!--Error messages-->
+    <string name="no_network">No network available</string>
+
+    <string name="permission_denied">You did not give permissions to get location</string>
+
     <!--Profile activity-->
     <string name="photos_profile">Photos</string>
-    <string name="checkins_profile">Checkins</string>
-    <string name="friends_profile">Friends</string>
-    <string name="tips_profile">tips</string>
 
-    <!--Bottom sheet fragment-->
-    <string name="add_checkin">Add new ckeckin</string>
-    <string name="comment_checkin">Comment (Optional)</string>
+    <!--Messages-->
+    <!--Ordinary messages-->
+    <string name="rationale_location">Permission is required to obtain location</string>
 
-    <!--Main custom adapter-->
-    <string name="checkins">Checkins</string>
     <string name="state">State</string>
 
-    <!--Grid venues-->
-    <string name="checkins_grid">Checkins</string>
-    <string name="users_grid">Users</string>
     <string name="tips_grid">Tips</string>
+
+    <string name="tips_profile">tips</string>
+
+    <string name="title_activity_maps">Map</string>
+
+    <string name="tracing_route">Tracing route…</string>
+
+    <string name="users_grid">Users</string>
 </resources>

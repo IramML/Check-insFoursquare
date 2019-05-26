@@ -21,13 +21,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import mehdi.sakout.fancybuttons.FancyButton
 import java.text.NumberFormat
 import java.util.*
 
 class VenueDetails : AppCompatActivity(), OnMapReadyCallback {
     var toolbar: Toolbar?=null
-    var btnCheckin:ImageButton?=null
-    var btnLike:ImageButton?=null
+    var btnCheckin: FancyButton?=null
+    var btnLike:FancyButton?=null
     var ivPhoto:ImageView?=null
     var btnHTG:ImageButton?=null
     private lateinit var mMap: GoogleMap
@@ -43,7 +44,7 @@ class VenueDetails : AppCompatActivity(), OnMapReadyCallback {
         val tvName=findViewById<TextView>(R.id.tvName)
         val tvState=findViewById<TextView>(R.id.tvState)
         val tvCountry=findViewById<TextView>(R.id.tvCountry)
-        btnCheckin=findViewById(R.id.btnCkeckin)
+        btnCheckin=findViewById(R.id.btnCheckin)
         btnLike=findViewById(R.id.btnLike)
         btnHTG=findViewById(R.id.btnHTG)
         val grid=findViewById<GridView>(R.id.grid)

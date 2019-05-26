@@ -1,48 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">Check-ins</string>
-    <string name="app_main">Lugares</string>
+    <!--Bottom sheet fragment-->
+    <string name="add_checkin">Añadir nuevo checkin</string>
+
     <string name="app_categories">Categorias</string>
+
     <string name="app_favorites">Likes</string>
+
+    <string name="app_main">Lugares</string>
+
     <string name="app_map">Rutas</string>
-    <string name="title_activity_maps">Map</string>
 
-    <!--Messages-->
-    <!--Ordinary messages-->
-    <string name="rationale_location">El permiso es requerido para obtener la localización</string>
+    <string name="app_name">Check-ins</string>
+
     <string name="checkin_success">Checkin agregado</string>
-    <string name="like_success">Nuevo like añadido</string>
-    <string name="tracing_route">Trazando ruta&#8230;</string>
 
-    <!--Error messages-->
-    <string name="no_network">No hay conexion a internet</string>
-    <string name="http_error">Hubo un error en la solicitud HTTP</string>
-    <string name="no_app_foursquare">La aplicación de Foursquare no está instalada</string>
+    <!--Main custom adapter-->
+    <string name="checkins">Checkins</string>
+
+    <!--Grid venues-->
+    <string name="checkins_grid">Checkins</string>
+
+    <string name="checkins_profile">Checkins</string>
+
+    <string name="comment_checkin">Comentario (Opcional)</string>
+
     <string name="error_connection_fsqr">No se pudo completar la conexion con Foursquare</string>
+
     <string name="error_exchange">No se pudo completar el exchange token con Foursquare</string>
-    <string name="error_save_token">No se pudo guardar el token</string>
-    <string name="permission_denied">No diste los permisos para obtener la ubicación</string>
+
     <string name="error_query">Hubo un problema con la solicitud a la API</string>
+
+    <string name="error_save_token">No se pudo guardar el token</string>
+
+    <string name="friends_profile">Amigos</string>
+
+    <string name="http_error">Hubo un error en la solicitud HTTP</string>
+
+    <string name="like_success">Nuevo like añadido</string>
 
     <!--Login activity-->
     <string name="login_foursquare">Iniciar sesión con Foursquare</string>
 
+    <string name="no_app_foursquare">La aplicación de Foursquare no está instalada</string>
+
+    <!--Error messages-->
+    <string name="no_network">No hay conexion a internet</string>
+
+    <string name="permission_denied">No diste los permisos para obtener la ubicación</string>
+
     <!--Profile activity-->
     <string name="photos_profile">Fotos</string>
-    <string name="checkins_profile">Checkins</string>
-    <string name="friends_profile">Amigos</string>
-    <string name="tips_profile">Tips</string>
 
-    <!--Bottom sheet fragment-->
-    <string name="add_checkin">Añadir nuevo checkin</string>
-    <string name="comment_checkin">Comentario (Opcional)</string>
+    <!--Messages-->
+    <!--Ordinary messages-->
+    <string name="rationale_location">El permiso es requerido para obtener la localización</string>
 
-    <!--Main custom adapter-->
-    <string name="checkins">Checkins</string>
     <string name="state">Estado</string>
 
-    <!--Grid venues-->
-    <string name="checkins_grid">Checkins</string>
-    <string name="users_grid">Usuarios</string>
     <string name="tips_grid">Tips</string>
+
+    <string name="tips_profile">Tips</string>
+
+    <string name="title_activity_maps">Map</string>
+
+    <string name="tracing_route">Trazando ruta…</string>
+
+    <string name="users_grid">Usuarios</string>
 </resources>
